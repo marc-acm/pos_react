@@ -1,61 +1,62 @@
 import React, { Component } from 'react';
 import './App.css';
 
-  class Menu extends Component {
-    constructor(props) {
-      super(props);
-      this.state = {qty:0};
-      this.add = this.add.bind(this);
-      this.show = this.show.bind(this);
-      this.less = this.less.bind(this);
+class Menu extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {qty:0};
+    this.add = this.add.bind(this);
+    this.show = this.show.bind(this);
+    this.less = this.less.bind(this);
+  }
 
-    }
+  add() {
+    this.setState({qty: this.state.qty + 1});
+    this.props.handleTotal(this.props.price); 
+  }
 
-    add() {
-      this.setState({qty: this.state.qty + 1});
-      this.props.handleTotal(this.props.price); 
-    }
-
-    show() {
-      this.props.handleShow(this.props.name);
-      this.props.handleShow(this.props.image);
-      }
+  show() {
+    this.props.handleShow(this.props.name);
+    this.props.handleShow(this.props.image);
+  }
     
 
-   less() {
-      this.setState({qty: this.state.qty - 1});
-
-      this.props.handleTotal(-this.props.price); 
-
-    }
-
+  less() {
+    this.setState({qty: this.state.qty - 1});
+    this.props.handleTotal(-this.props.price); 
+  }
 
 
 render() {
-    return (
-      <div class="thumbnail">
-      <img src={process.env.PUBLIC_URL + 'img/img'+ this.props.img_id +'.png'}alt="Menu Image"/>
-     <p>{this.props.name} =  Php
-      {this.props.price}</p>
-      <button className="btn btn-primary" onClick={this.buy}>+</button>
-      <button className="btn btn-primary" onClick={this.show}>Show</button>
-      <button className="btn btn-primary" onClick={this.bawas}>-</button>
+  return (
+    <div className="img-rounded">
+      <img src = {process.env.PUBLIC_URL + 'img/img'+ this.props.img_id +'.png'} alt = "Menu Image"/>
+    </div>
+    
+    <div>
+      <p>{this.props.name} = Php {this.props.price}</p>
+      <button className = "btn btn-primary" onClick={this.add}>+</button>
+      <button className = "btn btn-primary" onClick={this.show}>Show</button>
+      <button className = "btn btn-primary" onClick={this.less}>-</button>
       <h3>{this.state.qty}</h3>
-      <h3>Php  {this.state.qty*this.props.price}</h3>
-      <hr/>  
-      </div>
-    );
+      <h3>Php {this.state.qty*this.props.price}</h3>
+      <hr>  
+    </div>
+    )
+
   }
-}
+
+  
 
 
 
 class Total extends Component {
   render() {
     return (
-    <div>
+    
+
     <h3>Total Bill: Php {this.props.total}</h3> 
-    </div>
+  
    )
 
   }
@@ -83,16 +84,19 @@ class MenuForm extends Component {
       <form onSubmit={this.submit} class="form-group">
      <div className="container">
      <div className="row">
-     <div className="col-lg-4">
+     
+     <div className="col-md-4">
       <input className="form-control" type="text" placeholder="Menu Name" ref="name"/>
      </div>
-        <div className="col-lg-4">
+      
+      <div className="col-md-4">
       <input className="form-control" type="text" placeholder="Menu Price" ref="price"/>
        </div>
 
-<div className="col-lg-4">
-      <button className="btn btn-primary">Add Menu</button>
+      <div className="col-md-4">
+      <button className="btn btn-success">Add Menu</button>
       </div>
+      
       </div>
       </div>
       </form>
@@ -141,23 +145,19 @@ class MenuList extends Component {
         price={men.price}
         handleShow={component.showMenu}
         handleTotal={component.calcTotal}
-        className="round-image-50" img_id = {men.img_id}
+        img_id = {men.img_id}
         />
       );
     });  
     
 
     return(
-      <div>
-        <MenuForm handleCreate={this.createMenu}/>
-       {menus}
-       <Total total={this.state.total}/>
-       </div>
-
-
-
-
-
+      
+    <div className="container">
+      <MenuForm handleCreate={this.createMenu}/>
+      <Total total={this.state.total}/>
+     {menus}
+     </div>
    )    
   }  
 }
@@ -168,10 +168,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-             
-           <p className="App-intro">
- 
-        </p>
+     <p className="App-intro"> </p>
        <MenuList/>
       </div>
     );
