@@ -35,7 +35,7 @@ render() {
     </div>
     <div className="row">
      <p> {this.props.name} = Php {this.props.price}</p>
-     <button className = "btn btn-primary" onClick={this.show}>Show</button>
+
      <button className = "btn btn-primary" onClick={this.less}>-</button>
      <h3>{this.state.qty}</h3>
      <h3>Php {this.state.qty*this.props.price}</h3>
