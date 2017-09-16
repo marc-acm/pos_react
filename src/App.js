@@ -8,7 +8,7 @@ class Menu extends Component {
     this.add = this.add.bind(this);
     this.show = this.show.bind(this);
     this.less = this.less.bind(this);
-  }
+  } 
 
   add() {
     this.setState({qty: this.state.qty + 1});
@@ -28,39 +28,37 @@ class Menu extends Component {
 
 
 render() {
-  return (
+ return (
+  <div>
     <div className="img-rounded">
-      <img src = {process.env.PUBLIC_URL + 'img/img'+ this.props.img_id +'.png'} alt = "Menu Image"/>
+      <a href="#" onClick={this.add}> <img src = {process.env.PUBLIC_URL + 'img/img'+ this.props.img_id +'.png'} alt = "Menu Image"/></a>
     </div>
-    
-    <div>
-      <p>{this.props.name} = Php {this.props.price}</p>
-      <button className = "btn btn-primary" onClick={this.add}>+</button>
-      <button className = "btn btn-primary" onClick={this.show}>Show</button>
-      <button className = "btn btn-primary" onClick={this.less}>-</button>
-      <h3>{this.state.qty}</h3>
-      <h3>Php {this.state.qty*this.props.price}</h3>
-      <hr>  
-    </div>
-    )
-
-  }
-
+    <div className="row">
+     <p> {this.props.name} = Php {this.props.price}</p>
+     <button className = "btn btn-primary" onClick={this.show}>Show</button>
+     <button className = "btn btn-primary" onClick={this.less}>-</button>
+     <h3>{this.state.qty}</h3>
+     <h3>Php {this.state.qty*this.props.price}</h3>
+     <hr/>  
+     </div>
+  </div>
+  )
+ }
+};
   
-
-
 
 class Total extends Component {
   render() {
     return (
-    
-
     <h3>Total Bill: Php {this.props.total}</h3> 
-  
    )
-
-  }
+ }
 }
+
+
+
+
+
 
 class MenuForm extends Component {
   constructor(props) {
@@ -174,6 +172,8 @@ class App extends Component {
     );
   }
 }
+
+
 
 export default App;
 
