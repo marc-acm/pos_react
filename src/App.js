@@ -16,9 +16,6 @@ class Menu extends Component {
     this.props.handleTotal(this.props.price);
   }
 }
-    this.setState({qty: this.state.qty + 1});
-    this.props.handleTotal(this.props.price); 
-  }
 
   show() {
     this.props.handleShow(this.props.name);
@@ -34,25 +31,16 @@ class Menu extends Component {
   }
 }
 
-    this.setState({qty: this.state.qty - 1});
-    this.props.handleTotal(-this.props.price); 
-  }
-
-
 
 render() {
  return (
   <div>
-
    <div className="col col-md-3 col-xs-12">
-
-
-    <div className="img-rounded">
+       <div className="img-rounded">
       <a href="#" onClick={this.add}> <img src = {process.env.PUBLIC_URL + 'img/img'+ this.props.img_id +'.png'} alt = "Menu Image"/></a>
     </div>
     <div className="row">
      <p> {this.props.name} = Php {this.props.price}</p>
-
      <hr/>  
      </div>
     </div>
@@ -63,7 +51,7 @@ render() {
   
 
 class Total extends Component{
-  render(){
+  render() {
     return( 
     <div>
        <h4>Ordered Items: </h4>
@@ -79,36 +67,16 @@ class Total extends Component{
   }
 };
 
-     <button className = "btn btn-primary" onClick={this.less}>-</button>
-     <h3>{this.state.qty}</h3>
-     <h3>Php {this.state.qty*this.props.price}</h3>
-     <hr/>  
-     </div>
-  </div>
-  )
- }
-};
-  
-
-class Total extends Component {
-  render() {
-    return (
-    <h3>Total Bill: Php {this.props.total}</h3> 
-   )
- }
-}
-
-
-
-
-
+    
 
 
 class MenuForm extends Component {
-  constructor(props) {
+  constructor(props) 
+  {
     super(props);
     this.submit = this.submit.bind(this);
     }
+
     submit(e){
     e.preventDefault();
     var menu = {
@@ -120,14 +88,14 @@ class MenuForm extends Component {
       this.refs.name.value='';
       this.refs.name.value='';
  }
-}
+};
 
-  render() {
+  render(){
     return(
     <form onSubmit={this.submit} class="form-group">
-
       price:parseInt(this.refs.price.value
     )};
+
     this.props.handleCreate(menu);
     //alert(menu.name+ "has been added");
     this.refs.name.value='';
@@ -159,13 +127,6 @@ class MenuForm extends Component {
 
       )
    }
-}
-
-
-
-
-      );
-    }
 }
 
 
@@ -222,7 +183,7 @@ class MenuList extends Component {
     );
 
     return(
-     <div className="row">"
+     <div className="row">
       
       <div className="col-3">
           <Total total = {this.state.total}/>
