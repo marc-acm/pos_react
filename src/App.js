@@ -33,26 +33,22 @@ class Menu extends Component {
 
   render() {
     return (
-      <div>
-     
-      
-      <a href="#" onClick={this.add}> <img src = {process.env.PUBLIC_URL + 'img/img'+ this.props.img_id +'.png'} alt = "Menu Image"/></a>
-      <p>{this.props.name} = ${this.props.price}</p>
+      <div className="col col-md-3 col-xs-12">
+           <div className="img-rounded">
+             <a href="#" onClick={this.add}> <img src = {process.env.PUBLIC_URL + 'img/img'+ this.props.img_id +'.png'} alt = "Menu Image"/></a>
+             <p>{this.props.name} = Php {this.props.price}</p>
+             <button className="btn btn-primary" onClick={this.show}>Show</button>
+           </div>
 
-      <button className="btn btn-primary" onClick={this.show}>Show</button>
-      
       <button className="btn btn-primary" onClick={this.less}>-</button>
-      
       <h3>{this.state.qty}</h3>
-      
       <h3>Php {this.state.qty*this.props.price}</h3>
-      
-      <hr/>  
-      
+     
       </div>
     );
   }
 }
+
 
 
 class Total extends Component {
@@ -77,38 +73,9 @@ class Total extends Component {
   }
 }
 
-class MenuForm extends Component {
-  constructor(props) {
-    super(props);
-    this.submit = this.submit.bind(this);
-    }
-    submit(e){
-    e.preventDefault();
-    var menu = {
-      name:this.refs.name.value,
-      price:parseInt(this.refs.price.value
-    )};
-    this.props.handleCreate(menu);
-    //alert(menu.name+ "has been added");
-    this.refs.name.value='';
-    this.refs.name.value='';
- }
-
-  render() {
-    return(
-      <form onSubmit={this.submit} class="form-group">
-      <input className="form-control" type="text" placeholder="Name" ref="name"/>
-      <input className="form-control" type="text" placeholder="Price" ref="price"/>
-      <br/>
-      <button className="btn btn-primary">Add</button>
-      </form>
-      );
-    }
-}
 
 
 class MenuList extends Component {
-
     constructor(props) {
       super(props);
       this.state={total:0,
@@ -119,24 +86,18 @@ class MenuList extends Component {
                   {name:"Pinawikang Kabayo", price: 90.00, img_id: "04"}]
      };
       this.calcTotal = this.calcTotal.bind(this);
-      this.createMenu = this.createMenu.bind(this);
+  
     }
 
     calcTotal(price) {
       this.setState({total: this.state.total + price})
     }
 
-  showMenu(name) {
-     alert("Your are buying"+name);
- }
+    showMenu(name) {
+     alert("Your are buying" +name);
+    }
 
-    createMenu(menu) {
-    this.setState({
-      menuList: this.state.menuList.concat(menu)
-    });
-   }
-
-  
+ 
 
   render() {
     var component = this;
@@ -145,21 +106,23 @@ class MenuList extends Component {
     return(
         <Menu name={men.name} price={men.price}
         handleShow={component.showMenu}
-        handleTotal={component.calcTotal}
         img_id = {men.img_id}
-        />
-      );
-    });  
-    
-
+        handleTotal={component.calcTotal} 
+        />   
+    );
+  });  
     return(
+      <div className="row">
+         <div className="col-3">
+         <Total total={this.state.total}/>
+         </div>
       
-    <div className="container">
- 
-      <Total total={this.state.total}/>
-     {menus}
-     </div>
-
+         <div className="col-9">
+          <div className = "row">
+          {menus}
+          </div>
+        </div>
+      </div>
    )    
   }  
 }
@@ -168,18 +131,17 @@ class MenuList extends Component {
 class App extends Component {
   render() {
     return (
+
+<div className="container">
       <div className="App">
-
-
-     <p className="App-intro"> </p>
+       <center><img src="/eatifyoudare.png" class="img-responsive" id="logo"/></center>
+        <div>
     
-    <MenuForm handleCreate={this.createMenu}/>
    <br/><br/>
-
-
-     <p className="App-intro"> </p>
-
-       <MenuList/>
+         <p className="App-intro"> </p>
+        </div> 
+      <MenuList/>
+      </div>
       </div>
     );
   }
